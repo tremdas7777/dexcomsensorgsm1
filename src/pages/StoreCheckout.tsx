@@ -269,10 +269,39 @@ export default function StoreCheckout() {
     <div className="min-h-screen bg-background flex flex-col">
       <StoreHeader />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 lg:gap-8">
+        {/* Mobile: mini-resumo no topo (colapsável) */}
+        <details className="lg:hidden bg-white border border-border rounded-xl overflow-hidden -mt-1 group">
+          <summary className="flex items-center justify-between gap-3 px-4 py-3 cursor-pointer list-none">
+            <span className="flex items-center gap-2 text-sm font-bold">
+              <Truck className="h-4 w-4 text-primary" />
+              Ver resumo do pedido
+              <span className="ml-1 text-xs text-muted-foreground transition-transform group-open:rotate-180">▾</span>
+            </span>
+            <span className="text-lg font-extrabold">{formatBRL(subtotalCents)}</span>
+          </summary>
+          <ul className="border-t border-border divide-y divide-border">
+            {items.map((it) => (
+              <li key={it.key} className="flex gap-3 items-center px-4 py-3">
+                <div className="relative shrink-0">
+                  <img src={it.productImage} alt={it.productTitle} className="w-12 h-12 object-contain bg-secondary/40 rounded-md" />
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                    {it.quantity}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-bold truncate">{it.productTitle}</div>
+                  <div className="text-xs text-muted-foreground truncate">{it.variantTitle}</div>
+                </div>
+                <div className="text-sm font-bold">{formatBRL(it.unitPriceCents * it.quantity)}</div>
+              </li>
+            ))}
+          </ul>
+        </details>
+
         {/* ======================= FORMULÁRIO ======================= */}
         <section>
-          <h1 className="text-2xl sm:text-3xl font-extrabold mb-6">Finalizar compra</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold mb-5 sm:mb-6">Finalizar compra</h1>
 
           <div className="bg-white border border-border rounded-xl p-5 sm:p-6 space-y-4">
             <h2 className="font-bold flex items-center gap-2">
