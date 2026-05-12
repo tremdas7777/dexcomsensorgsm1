@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Centauro Brand - RED (#E60000) + White + Dark Gray */
+    /* Dexcom-inspired storefront — green (#1bb934) + White + Dark Gray */
     --background: 0 0% 100%;
     --foreground: 0 0% 13%;
 
@@ -16,8 +16,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
 
-    /* Centauro Red - exact brand color #E60000 = hsl(0, 100%, 45%) */
-    --primary: 0 100% 45%;
+    /* Dexcom green ≈ #1bb934 = hsl(132, 75%, 41%) */
+    --primary: 132 75% 41%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%;
@@ -34,7 +34,7 @@
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 100% 45%;
+    --ring: 132 75% 41%;
 
     --radius: 0.5rem;
 
@@ -47,12 +47,12 @@
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 26%;
-    --sidebar-primary: 0 100% 45%;
+    --sidebar-primary: 132 75% 41%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 96%;
     --sidebar-accent-foreground: 0 0% 13%;
     --sidebar-border: 0 0% 91%;
-    --sidebar-ring: 0 100% 45%;
+    --sidebar-ring: 132 75% 41%;
   }
 }
 
@@ -73,7 +73,7 @@
     min-height: 100%;
     min-height: 100svh;
     min-height: 100dvh;
-    background: hsl(var(--centauro-black));
+    background: hsl(var(--background));
   }
 
   body {
@@ -81,7 +81,7 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     margin: 0;
-    background-color: hsl(var(--centauro-black));
+    background-color: hsl(var(--background));
     overscroll-behavior-y: none;
   }
 

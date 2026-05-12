@@ -4,8 +4,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import QuizHome from "./pages/QuizHome";
-import Checkout from "./pages/Checkout";
+import StoreHome from "./pages/StoreHome";
+import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
+import StoreCheckout from "./pages/StoreCheckout";
 import AdminPanel from "./pages/AdminPanel";
 import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
@@ -52,10 +54,10 @@ const App = () => {
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<CloakedRoute><QuizHome /></CloakedRoute>} />
-          <Route path="/quiz" element={<CloakedRoute><QuizHome /></CloakedRoute>} />
-          <Route path="/parabens" element={<CloakedRoute><QuizHome /></CloakedRoute>} />
-          <Route path="/checkout" element={<CloakedRoute><Checkout /></CloakedRoute>} />
+          <Route path="/" element={<CloakedRoute><StoreHome /></CloakedRoute>} />
+          <Route path="/produto/:handle" element={<CloakedRoute><ProductPage /></CloakedRoute>} />
+          <Route path="/carrinho" element={<CloakedRoute><CartPage /></CloakedRoute>} />
+          <Route path="/checkout" element={<CloakedRoute><StoreCheckout /></CloakedRoute>} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/obrigado" element={<ThankYou />} />
           <Route path="/safe" element={<SafePage />} />
