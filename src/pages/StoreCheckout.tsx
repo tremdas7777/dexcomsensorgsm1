@@ -447,7 +447,7 @@ export default function StoreCheckout() {
         </section>
 
         {/* ======================= RESUMO =========================== */}
-        <aside className="lg:sticky lg:top-24 h-fit">
+        <aside className="hidden lg:block lg:sticky lg:top-24 h-fit">
           <div className="bg-white border border-border rounded-xl p-5">
             <h2 className="font-bold mb-4">Resumo do pedido</h2>
             <ul className="space-y-3">
