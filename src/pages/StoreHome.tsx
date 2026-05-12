@@ -15,30 +15,30 @@ export default function StoreHome() {
       <main className="flex-1">
         {/* HERO 1 — banner principal */}
         <section className="bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-14 flex flex-col items-center text-center">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-14 flex flex-col items-center text-center">
             <img
               src={HOME_HERO_IMAGES.banner}
               alt="The world's most powerful CGM systems"
-              className="w-full max-w-4xl rounded-lg shadow-sm mb-6"
+              className="w-full max-w-4xl rounded-lg shadow-sm mb-5 sm:mb-6"
               loading="eager"
             />
             <img
               src={HOME_HERO_IMAGES.logo}
               alt="Dexcom G7 logo"
-              className="h-10 sm:h-12 w-auto mb-6 object-contain"
+              className="h-8 sm:h-12 w-auto mb-4 sm:mb-6 object-contain"
               loading="eager"
             />
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-foreground max-w-3xl leading-tight">
+            <h1 className="text-2xl sm:text-5xl font-extrabold text-foreground max-w-3xl leading-tight">
               Conhecimento que impulsiona o progresso,
               <span className="text-primary"> percepção que impulsiona a saúde</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground max-w-2xl">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-lg text-muted-foreground max-w-2xl">
               Esteja no controle da sua glicose 24 horas por dia, com dados atualizados em tempo real.
             </p>
             <Button
               asChild
               size="lg"
-              className="mt-6 rounded-full px-8 h-12 text-base font-bold uppercase tracking-wide"
+              className="mt-5 sm:mt-6 rounded-full px-8 h-12 text-base font-bold uppercase tracking-wide w-full sm:w-auto max-w-xs"
             >
               <Link to={productHref}>Comprar agora</Link>
             </Button>
