@@ -35,10 +35,10 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col pb-20 md:pb-0">
       <StoreHeader />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         {/* Galeria */}
         <div>
           <div className="bg-white rounded-2xl p-6 sm:p-10 border border-border">
