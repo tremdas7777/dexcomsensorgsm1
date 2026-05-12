@@ -188,6 +188,21 @@ export default function ProductPage() {
         </p>
       </section>
 
+      {/* Sticky mobile buy bar */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur border-t border-border px-3 py-2.5 flex items-center gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+        <div className="leading-tight">
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Total</div>
+          <div className="text-lg font-extrabold text-foreground">{formatBRL(variant.priceCents * quantity)}</div>
+        </div>
+        <Button
+          onClick={handleBuyNow}
+          size="lg"
+          className="flex-1 rounded-full h-12 font-bold text-sm uppercase tracking-wide"
+        >
+          Comprar agora
+        </Button>
+      </div>
+
       <StoreFooter />
     </div>
   );
