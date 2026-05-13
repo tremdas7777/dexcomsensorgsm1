@@ -4,11 +4,17 @@ import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cartStore';
-import { formatBRL } from '@/lib/storeProduct';
+import { formatBRL, findVariant } from '@/lib/storeProduct';
 
 export default function CartPage() {
   const navigate = useNavigate();
   const { items, subtotalCents, updateQuantity, removeFromCart } = useCart();
+
+  const handleCheckout = () => {
+    const first = items[0];
+    if (!first) return;
+    window.location.href = findVariant(first.variantId).checkoutUrl;
+  };
 
   if (items.length === 0) {
     return (
@@ -111,7 +117,7 @@ export default function CartPage() {
               <span className="text-2xl font-extrabold">{formatBRL(subtotalCents)}</span>
             </div>
             <Button
-              onClick={() => navigate('/checkout')}
+              onClick={handleCheckout}
               size="lg"
               className="w-full mt-5 rounded-full h-12 font-bold text-base"
             >

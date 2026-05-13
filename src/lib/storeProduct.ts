@@ -11,6 +11,8 @@ export type ProductVariant = {
   subtitle: string;
   /** Preço em centavos. */
   priceCents: number;
+  /** URL de checkout externo (Shopify) para esta variante. */
+  checkoutUrl: string;
 };
 
 export type StoreProduct = {
@@ -41,18 +43,21 @@ export const STORE_PRODUCT: StoreProduct = {
       title: '1 Unidade',
       subtitle: '3 Sensores · 30 Dias de Monitoramento',
       priceCents: 26900,
+      checkoutUrl: 'https://seguro.sensordexcomgsm1.shop/api/public/shopify?product=123016595934&store=1230',
     },
     {
       id: 'v2',
       title: '2 Unidades',
       subtitle: '6 Sensores · 60 Dias de Monitoramento',
       priceCents: 49900,
+      checkoutUrl: 'https://seguro.sensordexcomgsm1.shop/api/public/shopify?product=123023951818&store=1230',
     },
     {
       id: 'v3',
       title: '3 Unidades',
       subtitle: '9 Sensores · 90 Dias de Monitoramento',
       priceCents: 69900,
+      checkoutUrl: 'https://seguro.sensordexcomgsm1.shop/api/public/shopify?product=123016595934&store=1230',
     },
   ],
   shortDescription:
