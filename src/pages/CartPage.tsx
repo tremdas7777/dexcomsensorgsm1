@@ -4,7 +4,7 @@ import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cartStore';
-import { formatBRL } from '@/lib/storeProduct';
+import { formatBRL, findVariant } from '@/lib/storeProduct';
 
 export default function CartPage() {
   const navigate = useNavigate();
