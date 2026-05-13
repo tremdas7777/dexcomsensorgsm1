@@ -88,10 +88,12 @@ export const STORE_PRODUCT: StoreProduct = {
 };
 
 export const HOME_HERO_IMAGES = {
-  banner: 'https://sensordexcomgsm1.shop/cdn/shop/files/the-world_s-most-powerful-cgm-systems_1.jpg?v=1778446730',
-  logo: 'https://sensordexcomgsm1.shop/cdn/shop/files/global-dexcom-g7-mg-smarphone-sensor-logo_1.webp?v=1778447262',
+  banner:
+    'https://cdn.shopify.com/s/files/1/0813/2778/4162/files/the-world_s-most-powerful-cgm-systems_1.jpg?v=1778446730',
+  logo:
+    'https://cdn.shopify.com/s/files/1/0813/2778/4162/files/global-dexcom-g7-mg-smarphone-sensor-logo_1.webp?v=1778447262',
   monitoring:
-    'https://sensordexcomgsm1.shop/cdn/shop/files/Scan-Free_Continuous_Monitoring_58092cb8-c13a-4811-af47-21465a9add14_1.webp?v=1778447910',
+    'https://cdn.shopify.com/s/files/1/0813/2778/4162/files/Scan-Free_Continuous_Monitoring_58092cb8-c13a-4811-af47-21465a9add14_1.webp?v=1778447910',
 };
 
 export const formatBRL = (cents: number) =>
