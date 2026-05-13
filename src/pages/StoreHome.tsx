@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { STORE_PRODUCT, HOME_HERO_IMAGES, formatBRL } from '@/lib/storeProduct';
 import { trackEvent } from '@/lib/funnelTracking';
 
+const HOME_PRODUCT_IMAGE = '/images/dexcom-g7-home-product.png';
+
 export default function StoreHome() {
   const tracked = useRef(false);
   useEffect(() => {
@@ -59,7 +61,7 @@ export default function StoreHome() {
             <Link to={productHref} className="block group">
               <div className="bg-white rounded-2xl p-6 shadow-sm">
                 <img
-                  src={STORE_PRODUCT.images[0]}
+                  src={HOME_PRODUCT_IMAGE}
                   alt={STORE_PRODUCT.title}
                   className="w-full h-auto object-contain max-h-[420px] mx-auto group-hover:scale-[1.02] transition-transform"
                   loading="lazy"

@@ -1,11 +1,62 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Minus, Plus, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
+import { Activity, Bell, Minus, Plus, ShieldCheck, Smartphone, Timer, Truck, BadgeCheck, Watch } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { STORE_PRODUCT, formatBRL } from '@/lib/storeProduct';
 import { trackEvent } from '@/lib/funnelTracking';
+
+const DEXCOM_G7_INFO = 'https://www.dexcom.com/pt-PT/dexcom-g7';
+const DEXCOM_COMPATIBILITY = 'https://www.dexcom.com/compatibility';
+
+const PRODUCT_HIGHLIGHTS: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+}[] = [
+  {
+    icon: Activity,
+    title: 'Leituras em tempo real',
+    body: 'Acompanhe a glicose no app, com curva e valores frequentes — no mesmo espírito do que a Dexcom apresenta para o G7: visão contínua para decisões no dia a dia.',
+  },
+  {
+    icon: Timer,
+    title: 'Aquecimento e rotina',
+    body: 'O G7 é conhecido por tempo de aquecimento curto antes de usar o sensor e por opções de tolerância para troca; confira sempre o manual da sua região e lote.',
+  },
+  {
+    icon: Watch,
+    title: 'Apple Watch e smartphone',
+    body: 'A Dexcom descreve modo de visualização no Apple Watch quando a combinação de aparelhos e app for compatível. Telefone e relógio são vendidos à parte; valide em compatibilidade Dexcom.',
+  },
+  {
+    icon: Smartphone,
+    title: 'Sensor compacto',
+    body: 'Sistema pequeno e integrado, pensado para discrição e fixação em locais indicados pelo fabricante (braço, abdômen etc., conforme manual e idade).',
+  },
+];
+
+const ALERT_TOPICS: { id: string; title: string; body: string }[] = [
+  {
+    id: 'predictive-low',
+    title: 'Aviso antes da hipo grave (estilo “Urgent Low Soon”)',
+    body: 'Na linha G7, a Dexcom promove um alerta preditivo que pode avisar com antecedência quando a glicose se aproxima de níveis muito baixos — o tempo e o comportamento exato dependem do app, região e configurações. Ajuste limites e som com calma, junto do seu médico.',
+  },
+  {
+    id: 'high-custom',
+    title: 'Hiperglicemia e personalização',
+    body: 'É comum poder definir limiares e avisos de glicose alta e repetir alertas até confirmar — útil para acordar à noite ou em situações de esquecimento. Veja na Dexcom quais alertas existem na sua versão do software.',
+  },
+  {
+    id: 'rate-loss',
+    title: 'Queda rápida, estabilidade e perda de sinal',
+    body: 'Sistemas MCG costumam incluir alertas de taxa de queda (glicose caindo muito rápido), estabilidade e falha de comunicação entre sensor e celular. São apoios à decisão, não substituem sintomas ou medidor de referência quando o fabricante o recomenda.',
+  },
+];
 
 export default function ProductPage() {
   const { handle } = useParams();
@@ -40,7 +91,8 @@ export default function ProductPage() {
     <div className="min-h-screen bg-background flex flex-col">
       <StoreHeader />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:pb-16 flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         {/* Galeria */}
         <div>
           <div className="bg-white rounded-2xl p-6 sm:p-10 border border-border">
@@ -160,23 +212,91 @@ export default function ProductPage() {
             </li>
           </ul>
         </div>
-      </main>
+        </div>
 
-      {/* Descrição */}
-      <section className="max-w-3xl w-full mx-auto px-4 sm:px-6 pb-16">
-        <article
-          className="prose prose-sm sm:prose-base max-w-none text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-ul:list-disc prose-ul:pl-6"
-          dangerouslySetInnerHTML={{ __html: product.fullDescriptionHtml }}
-        />
-        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {product.bullets.map((b) => (
-            <li key={b} className="flex items-start gap-2 text-sm">
-              <span className="text-primary font-bold mt-0.5">✓</span>
-              <span>{b}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <section className="mt-10 md:mt-14" aria-labelledby="destaques-g7">
+          <h2 id="destaques-g7" className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight">
+            Destaques do sistema
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground max-w-2xl">
+            Resumo alinhado ao que a Dexcom destaca para usuários: leituras contínuas, sensor compacto, rotina de
+            aquecimento e integração com smartphone e Apple Watch quando suportado.
+          </p>
+          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {PRODUCT_HIGHLIGHTS.map(({ icon: Icon, title, body }) => (
+              <Card key={title} className="border-border shadow-sm">
+                <CardHeader className="pb-2">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" aria-hidden />
+                  </div>
+                  <CardTitle className="text-base font-bold leading-snug">{title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground leading-relaxed">{body}</CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12 md:mt-16" aria-labelledby="alertas-g7">
+          <div className="flex items-start gap-3">
+            <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Bell className="h-5 w-5" aria-hidden />
+            </div>
+            <div>
+              <h2 id="alertas-g7" className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight">
+                Alertas — o que costuma importar mais
+              </h2>
+              <p className="mt-2 text-sm text-muted-foreground max-w-2xl leading-relaxed">
+                Na página do G7, a Dexcom chama atenção para alertas avançados (incluindo aviso preditivo de hipos e
+                personalização de hipers). Abaixo fica um resumo; a listagem completa e as regras exatas estão sempre
+                no site e no app Dexcom da sua região.
+              </p>
+            </div>
+          </div>
+          <Accordion type="single" collapsible className="mt-4 w-full max-w-3xl">
+            {ALERT_TOPICS.map((item) => (
+              <AccordionItem key={item.id} value={item.id}>
+                <AccordionTrigger className="text-left text-sm font-bold sm:text-base">{item.title}</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">{item.body}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+          <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            <a
+              href={DEXCOM_G7_INFO}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-primary underline underline-offset-2"
+            >
+              Ver página oficial Dexcom G7
+            </a>
+            <a
+              href={DEXCOM_COMPATIBILITY}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-primary underline underline-offset-2"
+            >
+              Compatibilidade de dispositivos
+            </a>
+          </div>
+        </section>
+
+        <section className="mt-12 md:mt-16 max-w-3xl w-full mx-auto pb-4">
+          <h2 className="text-lg font-extrabold text-foreground mb-3">Descrição do kit</h2>
+          <article
+            className="prose prose-sm sm:prose-base max-w-none text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-a:text-primary prose-ul:list-disc prose-ul:pl-6"
+            dangerouslySetInnerHTML={{ __html: product.fullDescriptionHtml }}
+          />
+          <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {product.bullets.map((b) => (
+              <li key={b} className="flex items-start gap-2 text-sm">
+                <span className="text-primary font-bold mt-0.5">✓</span>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
 
       <StoreFooter />
     </div>
