@@ -117,7 +117,7 @@ export default function CartPage() {
               <span className="text-2xl font-extrabold">{formatBRL(subtotalCents)}</span>
             </div>
             <Button
-              onClick={() => navigate('/checkout')}
+              onClick={handleCheckout}
               size="lg"
               className="w-full mt-5 rounded-full h-12 font-bold text-base"
             >
