@@ -130,22 +130,13 @@ export default function ProductPage() {
               </button>
             </div>
             <Button
-              onClick={handleAdd}
+              onClick={handleBuyNow}
               size="lg"
               className="flex-1 rounded-full h-12 font-bold text-base"
             >
-              <ShoppingBag className="mr-2 h-5 w-5" /> Adicionar ao carrinho
+              Comprar agora
             </Button>
           </div>
-
-          <Button
-            onClick={handleBuyNow}
-            variant="outline"
-            size="lg"
-            className="mt-3 w-full rounded-full h-12 font-bold text-base border-foreground text-foreground hover:bg-foreground hover:text-white"
-          >
-            Comprar agora
-          </Button>
 
           {/* Trust */}
           <ul className="mt-6 space-y-2 text-sm text-foreground">
