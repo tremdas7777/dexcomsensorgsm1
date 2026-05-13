@@ -10,6 +10,12 @@ export default function CartPage() {
   const navigate = useNavigate();
   const { items, subtotalCents, updateQuantity, removeFromCart } = useCart();
 
+  const handleCheckout = () => {
+    const first = items[0];
+    if (!first) return;
+    window.location.href = findVariant(first.variantId).checkoutUrl;
+  };
+
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
