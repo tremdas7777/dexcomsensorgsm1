@@ -23,11 +23,6 @@ export default function ProductPage() {
 
   const variant = product.variants.find((v) => v.id === variantId)!;
 
-  const handleAdd = () => {
-    addToCart(variant, quantity);
-    toast.success('Adicionado ao carrinho');
-  };
-
   const handleBuyNow = () => {
     window.location.href = variant.checkoutUrl;
   };
