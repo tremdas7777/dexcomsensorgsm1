@@ -1,10 +1,18 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { STORE_PRODUCT, HOME_HERO_IMAGES, formatBRL } from '@/lib/storeProduct';
+import { trackEvent } from '@/lib/funnelTracking';
 
 export default function StoreHome() {
+  const tracked = useRef(false);
+  useEffect(() => {
+    if (tracked.current) return;
+    tracked.current = true;
+    trackEvent('visitor');
+  }, []);
   const productHref = `/produto/${STORE_PRODUCT.handle}`;
   const fromPrice = Math.min(...STORE_PRODUCT.variants.map((v) => v.priceCents));
 

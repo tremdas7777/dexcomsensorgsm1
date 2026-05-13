@@ -5,6 +5,7 @@ import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cartStore';
 import { formatBRL, findVariant } from '@/lib/storeProduct';
+import { trackEvent } from '@/lib/funnelTracking';
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ export default function CartPage() {
   const handleCheckout = () => {
     const first = items[0];
     if (!first) return;
+    trackEvent('checkout');
+    trackEvent('checkout_step_1');
     window.location.href = findVariant(first.variantId).checkoutUrl;
   };
 

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Minus, Plus, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { STORE_PRODUCT, formatBRL } from '@/lib/storeProduct';
+import { trackEvent } from '@/lib/funnelTracking';
 
 export default function ProductPage() {
   const { handle } = useParams();
@@ -22,7 +23,16 @@ export default function ProductPage() {
 
   const variant = product.variants.find((v) => v.id === variantId)!;
 
+  const trackedView = useRef(false);
+  useEffect(() => {
+    if (trackedView.current) return;
+    trackedView.current = true;
+    trackEvent('quiz_started');
+  }, []);
+
   const handleBuyNow = () => {
+    trackEvent('checkout');
+    trackEvent('checkout_step_1');
     window.location.href = variant.checkoutUrl;
   };
 
