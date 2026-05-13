@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Minus, Plus, ShoppingBag, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
+import { Minus, Plus, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { STORE_PRODUCT, formatBRL } from '@/lib/storeProduct';
-import { addToCart, buyNow } from '@/lib/cartStore';
-import { toast } from 'sonner';
+import { buyNow } from '@/lib/cartStore';
 
 export default function ProductPage() {
   const { handle } = useParams();
