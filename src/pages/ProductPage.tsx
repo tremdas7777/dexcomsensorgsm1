@@ -30,8 +30,7 @@ export default function ProductPage() {
   };
 
   const handleBuyNow = () => {
-    buyNow(variant.id, quantity);
-    navigate('/checkout');
+    window.location.href = variant.checkoutUrl;
   };
 
   return (
