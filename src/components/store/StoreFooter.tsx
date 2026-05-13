@@ -20,6 +20,11 @@ export default function StoreFooter() {
         <div className="text-sm">
           <h4 className="font-semibold mb-3">Atendimento</h4>
           <ul className="space-y-2 text-white/70">
+            <li>
+              <a href="mailto:contato@sensordexcomgsm1.shop" className="hover:text-white underline underline-offset-2">
+                contato@sensordexcomgsm1.shop
+              </a>
+            </li>
             <li>Frete grátis para todo Brasil</li>
             <li>Pagamento via PIX (aprovação instantânea)</li>
             <li>Entrega rastreada</li>

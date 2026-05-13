@@ -36,6 +36,7 @@ export const STORE_PRODUCT: StoreProduct = {
   images: [
     'https://cdn.shopify.com/s/files/1/0813/2778/4162/files/252143054-748356795-dexcom-g7-packaging-applictaor-sensor-800px-s-trans.webp?v=1778448658',
     'https://cdn.shopify.com/s/files/1/0813/2778/4162/files/114390156-674777024-en-US-g7-sensor-STP-GT-001-004.webp?v=1778448699',
+    '/images/dexcom-g7-easy-application.webp',
   ],
   variants: [
     {
@@ -61,29 +62,28 @@ export const STORE_PRODUCT: StoreProduct = {
     },
   ],
   shortDescription:
-    'Sistema de monitoramento contínuo de glicose (MCG): leituras em tempo real no smartphone ou smartwatch compatível, com alertas inteligentes.',
+    'Sistema de monitoramento contínuo de glicose (MCG): compatível com iPhone (Apple) e smartphones Android, além de smartwatches e Apple Watch quando suportados pelo app — com leituras em tempo real e alertas.',
   bullets: [
     'Leituras automáticas a cada 5 minutos, sem escanear',
     'Alertas personalizáveis, incluindo aviso preditivo de hipoglicemia',
     'Sensor compacto e integrado, fácil de aplicar',
     'Aquecimento rápido antes do uso (siga o manual do fabricante)',
     'Indicado para diabetes tipo 1 e tipo 2 (conforme indicação médica)',
-    'Compatível com smartphone; modo direto ao Apple Watch quando suportado',
+    'Compatível com sistemas Apple (iOS) e Android: smartphone, smartwatch e Apple Watch (conforme app e modelos suportados)',
     'Mais controle no dia a dia com o app Dexcom',
     'Produto original Dexcom',
   ],
   fullDescriptionHtml: `
     <h2>Sensor Dexcom G7 – 30 dias de monitoramento contínuo</h2>
-    <p>O <strong>Dexcom G7</strong> é um sistema de <strong>monitoramento contínuo de glicose (MCG)</strong> usado por pessoas com diabetes para ver a tendência da glicemia ao longo do dia, com leituras frequentes no smartphone ou em outros dispositivos compatíveis.</p>
+    <p>O <strong>Dexcom G7</strong> é um sistema de <strong>monitoramento contínuo de glicose (MCG)</strong> usado por pessoas com diabetes para ver a tendência da glicemia ao longo do dia, com leituras frequentes no <strong>smartphone</strong> (sistemas <strong>Apple iOS</strong> e <strong>Android</strong>), em <strong>smartwatches</strong> compatíveis e no <strong>Apple Watch</strong> quando essa função estiver disponível para a sua combinação de aparelhos e região.</p>
     <p>Este kit inclui <strong>3 sensores Dexcom G7</strong>, com uso de até <strong>10 dias por sensor</strong>, totalizando até <strong>30 dias</strong> de utilização contínua, conforme orientação clínica e manual do produto.</p>
-    <p>O sensor envia dados para o app Dexcom; funcionalidades exatas (alertas, relógio, tolerâncias) dependem da versão do software, região e dispositivos pareados. Informação detalhada sobre <strong>alertas</strong>, <strong>compatibilidade</strong> e <strong>indicações</strong> está na documentação oficial da Dexcom.</p>
+    <p>O sensor envia dados para o app Dexcom; funcionalidades exatas (alertas, relógio, tolerâncias) dependem da versão do software, região e dispositivos pareados.</p>
     <h3>Conteúdo da embalagem</h3>
     <ul>
       <li>3 sensores Dexcom G7</li>
       <li>Até 30 dias de monitoramento no total (3 × até 10 dias)</li>
       <li>Períodos de tolerância e substituição conforme manual</li>
     </ul>
-    <p class="text-sm not-prose mt-4"><a href="https://www.dexcom.com/pt-PT/dexcom-g7" target="_blank" rel="noopener noreferrer" class="text-primary font-semibold underline underline-offset-2">Dexcom G7 — página oficial Dexcom</a> · <a href="https://www.dexcom.com/compatibility" target="_blank" rel="noopener noreferrer" class="text-primary font-semibold underline underline-offset-2">Lista de compatibilidade</a></p>
   `,
 };
 

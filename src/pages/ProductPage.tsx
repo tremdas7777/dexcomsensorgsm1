@@ -10,9 +10,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { STORE_PRODUCT, formatBRL } from '@/lib/storeProduct';
 import { trackEvent } from '@/lib/funnelTracking';
 
-const DEXCOM_G7_INFO = 'https://www.dexcom.com/pt-PT/dexcom-g7';
-const DEXCOM_COMPATIBILITY = 'https://www.dexcom.com/compatibility';
-
 const PRODUCT_HIGHLIGHTS: {
   icon: LucideIcon;
   title: string;
@@ -30,8 +27,8 @@ const PRODUCT_HIGHLIGHTS: {
   },
   {
     icon: Watch,
-    title: 'Apple Watch e smartphone',
-    body: 'A Dexcom descreve modo de visualização no Apple Watch quando a combinação de aparelhos e app for compatível. Telefone e relógio são vendidos à parte; valide em compatibilidade Dexcom.',
+    title: 'Apple, Android, smartwatch e Apple Watch',
+    body: 'O ecossistema Dexcom G7 acompanha iPhone (Apple) e celulares Android compatíveis. Você pode ver a glicose no app, em smartwatches suportados e no Apple Watch quando a combinação de dispositivos e software permitir. Aparelhos são vendidos à parte; confira no manual quais modelos funcionam na sua região.',
   },
   {
     icon: Smartphone,
@@ -49,7 +46,7 @@ const ALERT_TOPICS: { id: string; title: string; body: string }[] = [
   {
     id: 'high-custom',
     title: 'Hiperglicemia e personalização',
-    body: 'É comum poder definir limiares e avisos de glicose alta e repetir alertas até confirmar — útil para acordar à noite ou em situações de esquecimento. Veja na Dexcom quais alertas existem na sua versão do software.',
+    body: 'É comum poder definir limiares e avisos de glicose alta e repetir alertas até confirmar — útil para acordar à noite ou em situações de esquecimento. Confira no app quais alertas estão disponíveis na sua versão.',
   },
   {
     id: 'rate-loss',
@@ -220,7 +217,7 @@ export default function ProductPage() {
           </h2>
           <p className="mt-2 text-sm text-muted-foreground max-w-2xl">
             Resumo alinhado ao que a Dexcom destaca para usuários: leituras contínuas, sensor compacto, rotina de
-            aquecimento e integração com smartphone e Apple Watch quando suportado.
+            aquecimento e integração com iPhone, Android, smartwatch e Apple Watch quando suportado.
           </p>
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {PRODUCT_HIGHLIGHTS.map(({ icon: Icon, title, body }) => (
@@ -247,9 +244,9 @@ export default function ProductPage() {
                 Alertas — o que costuma importar mais
               </h2>
               <p className="mt-2 text-sm text-muted-foreground max-w-2xl leading-relaxed">
-                Na página do G7, a Dexcom chama atenção para alertas avançados (incluindo aviso preditivo de hipos e
-                personalização de hipers). Abaixo fica um resumo; a listagem completa e as regras exatas estão sempre
-                no site e no app Dexcom da sua região.
+                Na linha G7, a Dexcom chama atenção para alertas avançados (incluindo aviso preditivo de hipos e
+                personalização de hipers). Abaixo fica um resumo; a listagem completa e as regras exatas ficam no
+                aplicativo Dexcom da sua região.
               </p>
             </div>
           </div>
@@ -261,24 +258,6 @@ export default function ProductPage() {
               </AccordionItem>
             ))}
           </Accordion>
-          <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-            <a
-              href={DEXCOM_G7_INFO}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-primary underline underline-offset-2"
-            >
-              Ver página oficial Dexcom G7
-            </a>
-            <a
-              href={DEXCOM_COMPATIBILITY}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-primary underline underline-offset-2"
-            >
-              Compatibilidade de dispositivos
-            </a>
-          </div>
         </section>
 
         <section className="mt-12 md:mt-16 max-w-3xl w-full mx-auto pb-4">
