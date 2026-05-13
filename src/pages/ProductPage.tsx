@@ -27,12 +27,12 @@ export default function ProductPage() {
   useEffect(() => {
     if (trackedView.current) return;
     trackedView.current = true;
-    trackEvent('quiz_started');
+    trackEvent('store_product_view');
   }, []);
 
   const handleBuyNow = () => {
     trackEvent('checkout');
-    trackEvent('checkout_step_1');
+    trackEvent('external_checkout');
     window.location.href = variant.checkoutUrl;
   };
 
@@ -176,9 +176,6 @@ export default function ProductPage() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-xs text-muted-foreground">
-          *Picadas no dedo podem ser necessárias em determinadas situações. †Smartphone vendido separadamente. Verifique compatibilidade.
-        </p>
       </section>
 
       {/* Sticky mobile buy bar */}

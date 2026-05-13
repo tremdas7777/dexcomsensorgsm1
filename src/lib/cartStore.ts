@@ -4,6 +4,7 @@
  */
 import { useEffect, useState } from 'react';
 import { STORE_PRODUCT, findVariant, type ProductVariant } from './storeProduct';
+import { trackStoreCartEngagement } from './funnelTracking';
 
 const STORAGE_KEY = 'dexcom_cart_v1';
 const EVENT = 'dexcom-cart-changed';
@@ -65,6 +66,7 @@ export function addToCart(variant: ProductVariant, quantity = 1) {
     });
   }
   write(items);
+  trackStoreCartEngagement();
 }
 
 export function updateQuantity(key: string, quantity: number) {

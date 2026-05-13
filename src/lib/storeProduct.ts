@@ -66,17 +66,17 @@ export const STORE_PRODUCT: StoreProduct = {
     'Indicado para Diabetes Tipo 1 e Tipo 2',
     'Monitoramento contínuo da glicose 24 horas por dia',
     'Leituras automáticas a cada 5 minutos',
-    'Sem necessidade de picadas no dedo*',
+    'Sem necessidade de picadas no dedo',
     'Alertas personalizáveis para glicose alta ou baixa',
     'Sensor compacto, discreto e confortável',
-    'Conexão com smartphone compatível†',
+    'Conexão com smartphone compatível',
     'Mais praticidade e controle no tratamento do diabetes',
   ],
   fullDescriptionHtml: `
     <h2>Sensor Dexcom G7 – 30 Dias de Monitoramento Contínuo de Glicose</h2>
     <p>O <strong>Dexcom G7</strong> é um sistema avançado de Monitoramento Contínuo de Glicose (MCG), indicado para pessoas com <strong>Diabetes Tipo 1 e Tipo 2</strong>, oferecendo mais praticidade, controle e segurança no acompanhamento da glicemia no dia a dia.</p>
     <p>Este kit contém <strong>3 sensores Dexcom G7</strong>, com duração de até <strong>10 dias cada</strong>, totalizando <strong>30 dias de monitoramento contínuo</strong>.</p>
-    <p>O sensor é pequeno, discreto e confortável, realizando leituras automáticas da glicose a cada 5 minutos e enviando as informações diretamente para smartphone ou receptor compatível†. Assim, você acompanha seus níveis de glicose em tempo real, sem necessidade de escaneamento.</p>
+    <p>O sensor é pequeno, discreto e confortável, realizando leituras automáticas da glicose a cada 5 minutos e enviando as informações diretamente para smartphone ou receptor compatível. Assim, você acompanha seus níveis de glicose em tempo real, sem necessidade de escaneamento.</p>
     <h3>Conteúdo da embalagem</h3>
     <ul>
       <li>3 Sensores Dexcom G7</li>

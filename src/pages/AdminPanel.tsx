@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
-import { Eye, EyeOff, LogOut, Save, Link2, Info, BarChart3, ShoppingCart, TrendingUp, Users, CheckCircle, ArrowDown, Trash2, Code, Webhook, Bell, Zap, Loader2, ExternalLink, CreditCard, QrCode, Copy, RefreshCw, Plus, DollarSign, Shield, Gift, MessageCircle, FileImage } from 'lucide-react';
+import { Eye, EyeOff, LogOut, Save, Link2, Info, BarChart3, ShoppingCart, TrendingUp, Users, CheckCircle, ArrowDown, Trash2, Code, Webhook, Bell, Zap, Loader2, ExternalLink, CreditCard, QrCode, Copy, RefreshCw, Plus, DollarSign, Shield, MessageCircle, FileImage, Package, ShoppingBag } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
-import { getFunnelStats, clearFunnelEvents } from '@/lib/funnelTracking';
+import { getFunnelStats, clearFunnelEvents, type FunnelStats } from '@/lib/funnelTracking';
 import { getPixelConfig, savePixelConfig, type PixelConfig, type FacebookPixelEntry, type TikTokPixelEntry, type GoogleAdsEntry } from '@/lib/pixelManager';
 import { getWebhookConfig, saveWebhookConfig, fireWebhookEvent, syncWebhooksToDb, loadWebhooksFromDb, type WebhookConfig, type WebhookEntry } from '@/lib/webhookManager';
 import { getUtmifyConfig, saveUtmifyConfig, testUtmifyToken, sendUtmifyPending, sendUtmifySale, syncUtmifyConfigFromDb, type UtmifyConfig } from '@/lib/utmifyManager';
@@ -38,7 +38,18 @@ export default function AdminPanel() {
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('analytics');
   const [period, setPeriod] = useState(30);
-  const [stats, setStats] = useState({ visitors: 0, quizStarted: 0, quizCompleted: 0, scratchCard: 0, checkout: 0, purchase: 0, activeNow: 0, checkoutStep1: 0, checkoutStep2: 0, checkoutStep3: 0 });
+  const [stats, setStats] = useState<FunnelStats>({
+    visitors: 0,
+    storeProductView: 0,
+    storeCart: 0,
+    checkout: 0,
+    externalCheckout: 0,
+    purchase: 0,
+    activeNow: 0,
+    checkoutStep1: 0,
+    checkoutStep2: 0,
+    checkoutStep3: 0,
+  });
 
   // Pixel state
   const [pixelConfig, setPixelConfig] = useState<PixelConfig>({ facebookPixels: [], tiktokPixels: [], googleAdsPixels: [], utmifyHtml: '' });
@@ -280,12 +291,54 @@ export default function AdminPanel() {
   const globalConversion = pct(stats.purchase, stats.visitors);
 
   const funnelSteps = [
-    { icon: <Eye size={20} className="text-primary" />, title: 'Visitantes', description: 'Chegaram à landing page', count: stats.visitors, conversion: null as number | null, dropoff: `${pct(stats.quizStarted, stats.visitors)}% dos visitantes`, progressValue: 100 },
-    { icon: <TrendingUp size={20} className="text-centauro-green" />, title: 'Quiz Iniciado', description: 'Clicaram em Começar', count: stats.quizStarted, conversion: pct(stats.quizStarted, stats.visitors), dropoff: `${pct(stats.quizCompleted, stats.quizStarted)}% dos iniciados`, progressValue: stats.visitors > 0 ? (stats.quizStarted / stats.visitors) * 100 : 0 },
-    { icon: <CheckCircle size={20} className="text-centauro-gold" />, title: 'Quiz Completado', description: 'Terminaram as 8 perguntas', count: stats.quizCompleted, conversion: pct(stats.quizCompleted, stats.visitors), dropoff: `${pct(stats.scratchCard, stats.quizCompleted)}% dos completados`, progressValue: stats.visitors > 0 ? (stats.quizCompleted / stats.visitors) * 100 : 0 },
-    { icon: <Gift size={20} className="text-purple-500" />, title: 'Raspadinha', description: 'Abriram a raspadinha', count: stats.scratchCard, conversion: pct(stats.scratchCard, stats.visitors), dropoff: `${pct(stats.checkout, stats.scratchCard)}% da raspadinha`, progressValue: stats.visitors > 0 ? (stats.scratchCard / stats.visitors) * 100 : 0 },
-    { icon: <ShoppingCart size={20} className="text-orange-500" />, title: 'Checkout', description: 'Estão no checkout', count: stats.checkout, conversion: pct(stats.checkout, stats.visitors), dropoff: `${pct(stats.purchase, stats.checkout)}% do checkout`, progressValue: stats.visitors > 0 ? (stats.checkout / stats.visitors) * 100 : 0 },
-    { icon: <DollarSign size={20} className="text-destructive" />, title: 'Comprou', description: 'Geraram o PIX', count: stats.purchase, conversion: pct(stats.purchase, stats.visitors), dropoff: null as string | null, progressValue: stats.visitors > 0 ? (stats.purchase / stats.visitors) * 100 : 0 },
+    {
+      icon: <Eye size={20} className="text-primary" />,
+      title: 'Visitantes',
+      description: 'Chegaram à loja (página inicial)',
+      count: stats.visitors,
+      conversion: null as number | null,
+      dropoff: `${pct(stats.storeProductView, stats.visitors)}% dos visitantes`,
+      progressValue: 100,
+    },
+    {
+      icon: <Package size={20} className="text-centauro-green" />,
+      title: 'Página do produto',
+      description: 'Abriram a ficha do sensor',
+      count: stats.storeProductView,
+      conversion: pct(stats.storeProductView, stats.visitors),
+      dropoff: `${pct(stats.storeCart, stats.storeProductView)}% que viram o produto`,
+      progressValue: stats.visitors > 0 ? (stats.storeProductView / stats.visitors) * 100 : 0,
+    },
+    {
+      icon: <ShoppingBag size={20} className="text-centauro-gold" />,
+      title: 'Carrinho',
+      description: 'Carrinho com itens (add ou /carrinho)',
+      count: stats.storeCart,
+      conversion: pct(stats.storeCart, stats.visitors),
+      dropoff:
+        stats.storeCart > 0
+          ? `${pct(stats.checkout, stats.storeCart)}% do carrinho`
+          : `${pct(stats.checkout, stats.storeProductView)}% dos que viram o produto (checkout)`,
+      progressValue: stats.visitors > 0 ? (stats.storeCart / stats.visitors) * 100 : 0,
+    },
+    {
+      icon: <ShoppingCart size={20} className="text-purple-500" />,
+      title: 'Checkout iniciado',
+      description: 'PIX no site ou redirecionamento Shopify',
+      count: stats.checkout,
+      conversion: pct(stats.checkout, stats.visitors),
+      dropoff: `${pct(stats.purchase, stats.checkout)}% do checkout`,
+      progressValue: stats.visitors > 0 ? (stats.checkout / stats.visitors) * 100 : 0,
+    },
+    {
+      icon: <DollarSign size={20} className="text-destructive" />,
+      title: 'Comprou (PIX no site)',
+      description: 'Geraram cobrança PIX aqui',
+      count: stats.purchase,
+      conversion: pct(stats.purchase, stats.visitors),
+      dropoff: null as string | null,
+      progressValue: stats.visitors > 0 ? (stats.purchase / stats.visitors) * 100 : 0,
+    },
   ];
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
@@ -347,7 +400,9 @@ export default function AdminPanel() {
             <div className="flex items-start justify-between mb-2">
               <div>
                 <h2 className="text-xl font-black text-foreground">Funil de Conversão</h2>
-                <p className="text-muted-foreground text-xs">Atualização automática a cada 30 segundos</p>
+                <p className="text-muted-foreground text-xs">
+                  Atualização automática a cada 30 segundos. Compras concluídas apenas no Shopify não entram em Comprou (PIX no site).
+                </p>
               </div>
               <span className="flex items-center gap-1.5 bg-centauro-green/10 text-centauro-green text-xs font-bold px-3 py-1.5 rounded-full">
                 <span className="w-2 h-2 rounded-full bg-centauro-green animate-pulse" />
@@ -399,15 +454,14 @@ export default function AdminPanel() {
               <ResponsiveContainer width="100%" height={260}>
                 <BarChart data={[
                   { etapa: 'Visitantes', valor: stats.visitors, fill: 'hsl(var(--primary))' },
-                  { etapa: 'Quiz Início', valor: stats.quizStarted, fill: 'hsl(142, 71%, 45%)' },
-                  { etapa: 'Quiz Fim', valor: stats.quizCompleted, fill: 'hsl(45, 93%, 47%)' },
-                  { etapa: 'Raspadinha', valor: stats.scratchCard, fill: 'hsl(270, 60%, 55%)' },
-                  { etapa: 'Checkout', valor: stats.checkout, fill: 'hsl(30, 100%, 50%)' },
-                  { etapa: 'Comprou', valor: stats.purchase, fill: 'hsl(0, 84%, 60%)' },
+                  { etapa: 'Produto', valor: stats.storeProductView, fill: 'hsl(142, 71%, 45%)' },
+                  { etapa: 'Carrinho', valor: stats.storeCart, fill: 'hsl(45, 93%, 47%)' },
+                  { etapa: 'Checkout', valor: stats.checkout, fill: 'hsl(270, 60%, 55%)' },
+                  { etapa: 'PIX site', valor: stats.purchase, fill: 'hsl(0, 84%, 60%)' },
                 ]} layout="vertical" margin={{ left: 10, right: 30 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" horizontal={false} />
                   <XAxis type="number" tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} />
-                  <YAxis dataKey="etapa" type="category" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))', fontWeight: 700 }} width={80} />
+                  <YAxis dataKey="etapa" type="category" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))', fontWeight: 700 }} width={88} />
                   <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid hsl(var(--border))' }} />
                   <Bar dataKey="valor" radius={[0, 6, 6, 0]}>
                     {[
@@ -415,7 +469,6 @@ export default function AdminPanel() {
                       { fill: 'hsl(142, 71%, 45%)' },
                       { fill: 'hsl(45, 93%, 47%)' },
                       { fill: 'hsl(270, 60%, 55%)' },
-                      { fill: 'hsl(30, 100%, 50%)' },
                       { fill: 'hsl(0, 84%, 60%)' },
                     ].map((entry, i) => (
                       <Cell key={i} fill={entry.fill} />
@@ -428,57 +481,85 @@ export default function AdminPanel() {
             <Card className="mt-4 p-5 border border-border shadow-sm bg-background">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-black text-foreground text-base">Conversão Global</h3>
-                  <p className="text-muted-foreground text-xs">Visitantes que chegaram ao checkout</p>
+                  <h3 className="font-black text-foreground text-base">Conversão global</h3>
+                  <p className="text-muted-foreground text-xs">Visitantes que geraram PIX no site (não inclui compra só no Shopify)</p>
                 </div>
                 <div className="text-right">
                   <p className="text-4xl font-black text-foreground">{globalConversion}%</p>
-                  <p className="text-xs text-muted-foreground font-bold">{stats.checkout} de {stats.visitors} visitantes</p>
+                  <p className="text-xs text-muted-foreground font-bold">{stats.purchase} de {stats.visitors} visitantes</p>
                 </div>
               </div>
             </Card>
 
-            {/* Checkout Steps Breakdown */}
-            {stats.checkout > 0 && (
+            {/* Checkout: interno + externo */}
+            {(stats.checkout > 0 || stats.externalCheckout > 0) && (
               <Card className="mt-4 p-5 border border-border shadow-sm bg-background">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                     <ShoppingCart size={16} className="text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-black text-foreground text-sm">Etapas do Checkout</h3>
-                    <p className="text-muted-foreground text-[11px]">Onde os clientes estão no processo de compra</p>
+                    <h3 className="font-black text-foreground text-sm">Detalhe do checkout</h3>
+                    <p className="text-muted-foreground text-[11px]">
+                      Checkout interno (/checkout + PIX) e redirecionamento para Shopify
+                    </p>
                   </div>
                 </div>
                 <div className="space-y-3">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <ExternalLink size={14} className="text-purple-500" />
+                        <div>
+                          <p className="text-xs font-black text-foreground">Shopify (link externo)</p>
+                          <p className="text-[10px] text-muted-foreground">Saída para pagamento no domínio parceiro</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-sm font-black text-foreground">{stats.externalCheckout}</span>
+                        <span className="text-[10px] text-muted-foreground ml-1">
+                          ({stats.checkout ? Math.round((stats.externalCheckout / stats.checkout) * 100) : 0}% do checkout)
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-full bg-secondary rounded-full h-1.5">
+                      <div
+                        className="h-1.5 rounded-full transition-all bg-purple-500"
+                        style={{
+                          width: `${stats.checkout ? Math.min(100, Math.round((stats.externalCheckout / stats.checkout) * 100)) : 0}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+
                   {[
                     {
                       step: 1,
-                      label: 'Etapa 1 — Dados Pessoais',
-                      desc: 'Nome, e-mail, telefone e CPF',
+                      label: 'Interno — Etapa 1 · Dados pessoais',
+                      desc: 'Abriram /checkout (nome, e-mail, telefone, CPF)',
                       icon: <Users size={14} className="text-primary" />,
                       count: stats.checkoutStep1,
                       color: 'bg-primary',
                     },
                     {
                       step: 2,
-                      label: 'Etapa 2 — Endereço',
-                      desc: 'CEP, endereço e método de entrega',
+                      label: 'Interno — Etapa 2 · Endereço',
+                      desc: 'CEP preenchido e logradouro',
                       icon: <TrendingUp size={14} className="text-centauro-gold" />,
                       count: stats.checkoutStep2,
                       color: 'bg-centauro-gold',
                     },
                     {
                       step: 3,
-                      label: 'Etapa 3 — Pagamento',
-                      desc: 'PIX ou cartão de crédito',
+                      label: 'Interno — Etapa 3 · Pronto para PIX',
+                      desc: 'Formulário válido (antes de gerar cobrança)',
                       icon: <CheckCircle size={14} className="text-centauro-green" />,
                       count: stats.checkoutStep3,
                       color: 'bg-centauro-green',
                     },
                   ].map(({ step, label, desc, icon, count, color }) => {
                     const base = stats.checkoutStep1 || 1;
-                    const pct = Math.round((count / base) * 100);
+                    const stepPct = Math.round((count / base) * 100);
                     return (
                       <div key={step}>
                         <div className="flex items-center justify-between mb-1">
@@ -491,18 +572,19 @@ export default function AdminPanel() {
                           </div>
                           <div className="text-right">
                             <span className="text-sm font-black text-foreground">{count}</span>
-                            <span className="text-[10px] text-muted-foreground ml-1">({pct}%)</span>
+                            <span className="text-[10px] text-muted-foreground ml-1">({stepPct}%)</span>
                           </div>
                         </div>
                         <div className="w-full bg-secondary rounded-full h-1.5">
                           <div
                             className={`h-1.5 rounded-full transition-all ${color}`}
-                            style={{ width: `${Math.min(pct, 100)}%` }}
+                            style={{ width: `${Math.min(stepPct, 100)}%` }}
                           />
                         </div>
                         {step < 3 && (
                           <p className="text-[10px] text-destructive font-bold mt-0.5 pl-1">
-                            ↓ {(() => {
+                            ↓{' '}
+                            {(() => {
                               const next = step === 1 ? stats.checkoutStep2 : stats.checkoutStep3;
                               const dropped = count - next;
                               return dropped > 0 ? `${dropped} abandonaram nesta etapa` : 'Nenhum abandono';

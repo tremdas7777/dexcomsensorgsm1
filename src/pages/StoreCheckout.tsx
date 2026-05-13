@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader2, Lock, ShieldCheck, Truck } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
@@ -79,6 +79,9 @@ export default function StoreCheckout() {
   const [pixQrCodeBase64, setPixQrCodeBase64] = useState('');
   const [pixOrderId, setPixOrderId] = useState('');
 
+  const checkoutStep2Tracked = useRef(false);
+  const checkoutStep3Tracked = useRef(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     trackEvent('checkout');
@@ -129,6 +132,22 @@ export default function StoreCheckout() {
     numero.trim() &&
     cidade.trim() &&
     estado.trim();
+
+  useEffect(() => {
+    if (checkoutStep2Tracked.current) return;
+    if (onlyDigits(cep).length === 8 && endereco.trim().length > 0) {
+      checkoutStep2Tracked.current = true;
+      void trackEvent('checkout_step_2');
+    }
+  }, [cep, endereco]);
+
+  useEffect(() => {
+    if (checkoutStep3Tracked.current) return;
+    if (formValid) {
+      checkoutStep3Tracked.current = true;
+      void trackEvent('checkout_step_3');
+    }
+  }, [formValid]);
 
   /* --------------------------- gerar PIX ------------------------------- */
   const handleSubmit = async () => {

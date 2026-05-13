@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
@@ -5,17 +6,22 @@ import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cartStore';
 import { formatBRL, findVariant } from '@/lib/storeProduct';
-import { trackEvent } from '@/lib/funnelTracking';
+import { trackEvent, trackStoreCartEngagement } from '@/lib/funnelTracking';
 
 export default function CartPage() {
   const navigate = useNavigate();
   const { items, subtotalCents, updateQuantity, removeFromCart } = useCart();
 
+  useEffect(() => {
+    if (items.length === 0) return;
+    trackStoreCartEngagement();
+  }, [items.length]);
+
   const handleCheckout = () => {
     const first = items[0];
     if (!first) return;
     trackEvent('checkout');
-    trackEvent('checkout_step_1');
+    trackEvent('external_checkout');
     window.location.href = findVariant(first.variantId).checkoutUrl;
   };
 
