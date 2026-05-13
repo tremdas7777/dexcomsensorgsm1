@@ -11,6 +11,8 @@ export type ProductVariant = {
   subtitle: string;
   /** Preço em centavos. */
   priceCents: number;
+  /** URL de checkout externo (Shopify) para esta variante. */
+  checkoutUrl: string;
 };
 
 export type StoreProduct = {
