@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Minus, Plus, ShoppingBag, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
+import { Minus, Plus, ShieldCheck, Truck, BadgeCheck } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { STORE_PRODUCT, formatBRL } from '@/lib/storeProduct';
-import { addToCart, buyNow } from '@/lib/cartStore';
-import { toast } from 'sonner';
 
 export default function ProductPage() {
   const { handle } = useParams();
@@ -23,11 +21,6 @@ export default function ProductPage() {
   const [activeImage, setActiveImage] = useState(0);
 
   const variant = product.variants.find((v) => v.id === variantId)!;
-
-  const handleAdd = () => {
-    addToCart(variant, quantity);
-    toast.success('Adicionado ao carrinho');
-  };
 
   const handleBuyNow = () => {
     window.location.href = variant.checkoutUrl;
@@ -136,22 +129,13 @@ export default function ProductPage() {
               </button>
             </div>
             <Button
-              onClick={handleAdd}
+              onClick={handleBuyNow}
               size="lg"
               className="flex-1 rounded-full h-12 font-bold text-base"
             >
-              <ShoppingBag className="mr-2 h-5 w-5" /> Adicionar ao carrinho
+              Comprar agora
             </Button>
           </div>
-
-          <Button
-            onClick={handleBuyNow}
-            variant="outline"
-            size="lg"
-            className="mt-3 w-full rounded-full h-12 font-bold text-base border-foreground text-foreground hover:bg-foreground hover:text-white"
-          >
-            Comprar agora
-          </Button>
 
           {/* Trust */}
           <ul className="mt-6 space-y-2 text-sm text-foreground">
