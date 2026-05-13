@@ -37,7 +37,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col pb-20 md:pb-0">
+    <div className="min-h-screen bg-background flex flex-col">
       <StoreHeader />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
@@ -177,21 +177,6 @@ export default function ProductPage() {
           ))}
         </ul>
       </section>
-
-      {/* Sticky mobile buy bar */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur border-t border-border px-3 py-2.5 flex items-center gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
-        <div className="leading-tight">
-          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Total</div>
-          <div className="text-lg font-extrabold text-foreground">{formatBRL(variant.priceCents * quantity)}</div>
-        </div>
-        <Button
-          onClick={handleBuyNow}
-          size="lg"
-          className="flex-1 rounded-full h-12 font-bold text-sm uppercase tracking-wide"
-        >
-          Comprar agora
-        </Button>
-      </div>
 
       <StoreFooter />
     </div>
