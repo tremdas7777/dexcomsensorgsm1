@@ -23,7 +23,16 @@ export default function ProductPage() {
 
   const variant = product.variants.find((v) => v.id === variantId)!;
 
+  const trackedView = useRef(false);
+  useEffect(() => {
+    if (trackedView.current) return;
+    trackedView.current = true;
+    trackEvent('quiz_started');
+  }, []);
+
   const handleBuyNow = () => {
+    trackEvent('checkout');
+    trackEvent('checkout_step_1');
     window.location.href = variant.checkoutUrl;
   };
 
