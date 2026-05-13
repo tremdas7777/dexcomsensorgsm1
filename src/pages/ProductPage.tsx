@@ -5,7 +5,7 @@ import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
 import { Button } from '@/components/ui/button';
 import { STORE_PRODUCT, formatBRL } from '@/lib/storeProduct';
-import { buyNow } from '@/lib/cartStore';
+import { STORE_PRODUCT, formatBRL } from '@/lib/storeProduct';
 
 export default function ProductPage() {
   const { handle } = useParams();
