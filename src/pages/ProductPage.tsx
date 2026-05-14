@@ -124,7 +124,7 @@ export default function ProductPage() {
             {formatBRL(variant.priceCents)}
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            ou em até <strong>12x</strong> com PIX (aprovação instantânea)
+            Pagamento via PIX — aprovação instantânea
           </p>
 
           {/* Variantes */}
