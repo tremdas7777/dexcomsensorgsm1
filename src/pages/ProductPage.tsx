@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Activity, Bell, Minus, Plus, ShieldCheck, Smartphone, Timer, Truck, BadgeCheck, Watch } from 'lucide-react';
+import { Activity, Bell, CreditCard, Minus, Plus, ShieldCheck, Smartphone, Timer, Truck, BadgeCheck, Watch } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
@@ -165,9 +165,15 @@ export default function ProductPage() {
           <div className="mt-3 text-3xl font-extrabold text-foreground">
             {formatBRL(variant.priceCents)}
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <PixLogo className="h-6 max-w-[min(100%,12rem)]" />
-            <span>Pagamento via PIX — aprovação instantânea</span>
+          <div className="mt-2 space-y-1.5 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-2">
+              <PixLogo className="h-6 max-w-[min(100%,12rem)]" />
+              <span>PIX — aprovação instantânea</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <CreditCard className="h-4 w-4 text-primary shrink-0" aria-hidden />
+              <span>Cartão de crédito em até 12x na finalização</span>
+            </div>
           </div>
 
           {/* Variantes */}
@@ -247,7 +253,7 @@ export default function ProductPage() {
             <li className="flex flex-wrap items-center gap-2">
               <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
               <span className="flex flex-wrap items-center gap-1.5">
-                Pagamento 100% seguro via <PixLogo className="h-5 max-w-[10rem]" />
+                Pagamento 100% seguro: <PixLogo className="h-5 max-w-[10rem]" /> ou cartão em até 12x
               </span>
             </li>
             <li className="flex items-center gap-2">
@@ -341,7 +347,8 @@ export default function ProductPage() {
             ))}
           </div>
           <p className="mt-10 text-center text-sm font-semibold text-foreground max-w-xl mx-auto">
-            Pronto para mais clareza no bolso? Escolha a quantidade no topo e finalize com PIX — frete grátis Brasil.
+            Pronto para mais clareza no bolso? Escolha a quantidade no topo e finalize com PIX ou cartão em até 12x —
+            frete grátis Brasil.
           </p>
         </section>
 

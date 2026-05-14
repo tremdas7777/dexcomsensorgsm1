@@ -71,7 +71,7 @@ export const STORE_PRODUCT: StoreProduct = {
     'Perfil fino no braço — uso no dia a dia com discrição',
     'Indicado para diabetes tipo 1 e 2, com orientação médica',
     'iPhone, Android, smartwatch e Apple Watch conforme compatibilidade do app',
-    'Frete grátis Brasil + PIX na finalização',
+    'Frete grátis Brasil + PIX ou cartão em até 12x na finalização',
     'Produto original Dexcom',
   ],
   fullDescriptionHtml: `
