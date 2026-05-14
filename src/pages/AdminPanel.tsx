@@ -27,6 +27,20 @@ const ADMIN_PASSWORD = 'escalabahia';
 /** CPF com dígitos verificadores válidos — gateways costumam recusar CPF fictício mal formado. */
 const TEST_PIX_DOCUMENT = '52998224725';
 
+/** Opções de janela temporal do funil (minutos). Inclui horas e dias para análise mais longa. */
+const ANALYTICS_PERIOD_OPTIONS: { minutes: number; label: string }[] = [
+  { minutes: 15, label: '15 min' },
+  { minutes: 30, label: '30 min' },
+  { minutes: 60, label: '1 h' },
+  { minutes: 180, label: '3 h' },
+  { minutes: 360, label: '6 h' },
+  { minutes: 720, label: '12 h' },
+  { minutes: 1440, label: '24 h' },
+  { minutes: 2880, label: '48 h' },
+  { minutes: 10080, label: '7 dias' },
+  { minutes: 43200, label: '30 dias' },
+];
+
 type Tab = 'analytics' | 'financeiro' | 'leads' | 'pixels' | 'webhooks' | 'utmify' | 'checkout' | 'pagamentos' | 'pedidos' | 'cloaker' | 'cards';
 
 export default function AdminPanel() {
@@ -37,7 +51,7 @@ export default function AdminPanel() {
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('analytics');
-  const [period, setPeriod] = useState(30);
+  const [period, setPeriod] = useState(60);
   const [stats, setStats] = useState<FunnelStats>({
     visitors: 0,
     storeProductView: 0,
@@ -410,11 +424,18 @@ export default function AdminPanel() {
               </span>
             </div>
 
-            <div className="flex items-center gap-2 mb-6">
-              <span className="text-xs font-bold text-muted-foreground">Período:</span>
-              {[5, 10, 15, 30, 60].map((m) => (
-                <button key={m} onClick={() => setPeriod(m)} className={`px-3 py-1.5 rounded-md text-xs font-bold transition-colors ${period === m ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-muted border border-border'}`}>
-                  {m} min
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <span className="text-xs font-bold text-muted-foreground shrink-0">Período:</span>
+              {ANALYTICS_PERIOD_OPTIONS.map(({ minutes: m, label }) => (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => setPeriod(m)}
+                  className={`px-3 py-1.5 rounded-md text-xs font-bold transition-colors whitespace-nowrap ${
+                    period === m ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-muted border border-border'
+                  }`}
+                >
+                  {label}
                 </button>
               ))}
             </div>
