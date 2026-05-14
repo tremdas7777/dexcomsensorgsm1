@@ -44,7 +44,7 @@ export const STORE_PRODUCT: StoreProduct = {
       id: 'v1',
       title: '1 Unidade',
       subtitle: '3 Sensores · 30 Dias de Monitoramento',
-      priceCents: 26990,
+      priceCents: 26700,
       checkoutUrl: 'https://seguro.sensordexcomgsm1.shop/api/public/shopify?product=123016595934&store=1230',
     },
     {
