@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PaymentFooterBadges from '@/components/store/PaymentFooterBadges';
 
 const SUPPORT_WHATSAPP_E164 = '5511963569864';
 const WHATSAPP_SUPPORT_URL = `https://wa.me/${SUPPORT_WHATSAPP_E164}?text=${encodeURIComponent('Olá, preciso de suporte.')}`;
@@ -14,7 +15,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export default function StoreFooter() {
   return (
     <footer className="bg-foreground text-white mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
         <div>
           <span className="text-primary font-extrabold text-2xl lowercase">dexcom</span>
           <p className="text-white/70 text-sm mt-3 leading-relaxed">
@@ -41,7 +43,7 @@ export default function StoreFooter() {
               </a>
             </li>
             <li>Frete grátis para todo Brasil</li>
-            <li>Pagamento via PIX (aprovação instantânea)</li>
+            <li>PIX (instantâneo) e cartão em até 12x</li>
             <li>Entrega rastreada</li>
           </ul>
           <a
@@ -53,6 +55,12 @@ export default function StoreFooter() {
             <WhatsAppIcon className="h-5 w-5 shrink-0" />
             Suporte no WhatsApp
           </a>
+        </div>
+        </div>
+
+        <div className="mt-10 pt-8 border-t border-white/10">
+          <p className="text-xs font-semibold uppercase tracking-wide text-white/80 mb-3">Formas de pagamento</p>
+          <PaymentFooterBadges />
         </div>
       </div>
       <div className="border-t border-white/10 text-center text-xs text-white/50 py-4 px-4 space-y-1.5">
