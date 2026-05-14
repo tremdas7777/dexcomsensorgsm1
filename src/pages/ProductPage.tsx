@@ -172,7 +172,7 @@ export default function ProductPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <CreditCard className="h-4 w-4 text-primary shrink-0" aria-hidden />
-              <span>Cartão de crédito em até 12x na finalização</span>
+              <span>Cartão de crédito em até 12x</span>
             </div>
           </div>
 
