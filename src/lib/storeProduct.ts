@@ -81,7 +81,6 @@ export const STORE_PRODUCT: StoreProduct = {
     <ul>
       <li>3 sensores Dexcom G7 (embalagem do fabricante)</li>
       <li>Períodos de aquecimento e tolerância descritos no manual</li>
-      <li>Uso somente com prescrição / orientação profissional quando exigido</li>
     </ul>
   `,
 };
