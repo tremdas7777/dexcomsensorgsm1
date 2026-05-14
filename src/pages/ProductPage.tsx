@@ -4,6 +4,7 @@ import { Activity, Bell, Minus, Plus, ShieldCheck, Smartphone, Timer, Truck, Bad
 import type { LucideIcon } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
+import PixLogo from '@/components/PixLogo';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
