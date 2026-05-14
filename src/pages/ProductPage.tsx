@@ -56,6 +56,47 @@ const ALERT_TOPICS: { id: string; title: string; body: string }[] = [
   },
 ];
 
+const STORY_BLOCKS: {
+  src: string;
+  alt: string;
+  kicker: string;
+  title: string;
+  body: string;
+}[] = [
+  {
+    src: '/images/desc-g7-tips-lifestyle.png',
+    alt: 'Celular com app Dexcom mostrando glicose e gráfico, sensor e aplicador ao lado',
+    kicker: 'Menos “chute”, mais padrão',
+    title: 'A glicemia oscila o dia inteiro — o G7 ajuda você a enxergar a curva',
+    body:
+      'Com leituras frequentes no aplicativo, você deixa de depender só de um número isolado e passa a ver subida, descida e estabilidade. Isso apoia decisões sobre refeição, atividade e medicação, sempre com orientação médica e seguindo o manual Dexcom.',
+  },
+  {
+    src: '/images/desc-g7-sensor-no-braco.png',
+    alt: 'Sensor Dexcom G7 discreto no braço',
+    kicker: 'No corpo, no hábito',
+    title: 'Sensor compacto no braço — monitoramento que tenta sumir na roupa',
+    body:
+      'O perfil fino e o adesivo firme sugerem uso no dia a dia: trabalho, treino, manga curta. A ideia é continuidade sem chamar atenção; locais de aplicação e cuidados com a pele estão no guia do fabricante.',
+  },
+  {
+    src: '/images/desc-g7-app-restaurante.png',
+    alt: 'Pessoa consultando app Dexcom em mesa de restaurante',
+    kicker: 'Vida social e rotina',
+    title: 'Jantar fora, estresse, carboidrato inesperado: tendência no bolso',
+    body:
+      'Olhar a tendência no celular pode reduzir a ansiedade quando o contexto muda. Não substitui sintomas nem o cuidado do seu time de saúde, mas dá mais contexto na hora H — como um painel rápido antes de agir.',
+  },
+  {
+    src: '/images/desc-g7-aplicacao-braco.png',
+    alt: 'Aplicação do sensor Dexcom no braço com aplicador',
+    kicker: 'Menos atrito na troca',
+    title: 'Aplicador pensado para encaixar na correria da troca de sensor',
+    body:
+      'Quem vive de calendário de troca sabe: quanto mais simples o passo a passo, mais fácil manter o hábito. O G7 integra sensor e transmissão num formato que a Dexcom desenhou para aplicação objetiva — siga sempre o manual do lote e a indicação clínica.',
+  },
+];
+
 export default function ProductPage() {
   const { handle } = useParams();
   const navigate = useNavigate();
@@ -124,8 +165,8 @@ export default function ProductPage() {
           <div className="mt-3 text-3xl font-extrabold text-foreground">
             {formatBRL(variant.priceCents)}
           </div>
-          <div className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-            <PixLogo className="h-3.5 w-3.5" />
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+            <PixLogo className="h-6 max-w-[min(100%,12rem)]" />
             <span>Pagamento via PIX — aprovação instantânea</span>
           </div>
 
@@ -194,7 +235,6 @@ export default function ProductPage() {
               size="lg"
               className="flex-1 rounded-full h-12 font-bold text-base"
             >
-              <PixLogo className="h-4 w-4 mr-2" />
               Comprar agora
             </Button>
           </div>
@@ -204,8 +244,11 @@ export default function ProductPage() {
             <li className="flex items-center gap-2">
               <Truck className="h-4 w-4 text-primary" /> Frete grátis para todo o Brasil
             </li>
-            <li className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-primary" /> Pagamento 100% seguro via <PixLogo className="h-3.5 w-3.5 inline" />
+            <li className="flex flex-wrap items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
+              <span className="flex flex-wrap items-center gap-1.5">
+                Pagamento 100% seguro via <PixLogo className="h-5 max-w-[10rem]" />
+              </span>
             </li>
             <li className="flex items-center gap-2">
               <BadgeCheck className="h-4 w-4 text-primary" /> Produto original Dexcom
@@ -261,6 +304,45 @@ export default function ProductPage() {
               </AccordionItem>
             ))}
           </Accordion>
+        </section>
+
+        <section className="mt-12 md:mt-16" aria-labelledby="historia-g7" id="historia-produto">
+          <h2 id="historia-g7" className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight">
+            Por que o G7 converte confiança em ação no diabetes
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground max-w-2xl leading-relaxed">
+            Imagens reais de uso: tecnologia que fala a mesma língua de quem precisa de clareza, discrição e rotina
+            sustentável — sem prometer resultado clínico; combine sempre com seu médico ou educador em diabetes.
+          </p>
+          <div className="mt-8 space-y-12 md:space-y-16">
+            {STORY_BLOCKS.map((block, i) => (
+              <div
+                key={block.src}
+                className={`flex flex-col gap-6 md:flex-row md:items-center md:gap-10 ${
+                  i % 2 === 1 ? 'md:flex-row-reverse' : ''
+                }`}
+              >
+                <div className="md:w-1/2 shrink-0">
+                  <img
+                    src={block.src}
+                    alt={block.alt}
+                    width={800}
+                    height={600}
+                    loading="lazy"
+                    className="w-full rounded-xl border border-border bg-white object-cover shadow-sm"
+                  />
+                </div>
+                <div className="md:w-1/2">
+                  <p className="text-xs font-bold uppercase tracking-wide text-primary">{block.kicker}</p>
+                  <h3 className="mt-2 text-lg sm:text-xl font-extrabold text-foreground leading-snug">{block.title}</h3>
+                  <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">{block.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-center text-sm font-semibold text-foreground max-w-xl mx-auto">
+            Pronto para mais clareza no bolso? Escolha a quantidade no topo e finalize com PIX — frete grátis Brasil.
+          </p>
         </section>
 
         <section className="mt-12 md:mt-16 max-w-3xl w-full mx-auto pb-4">

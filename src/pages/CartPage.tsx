@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
-import PixLogo from '@/components/PixLogo';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cartStore';
 import { formatBRL, findVariant } from '@/lib/storeProduct';
@@ -131,7 +130,6 @@ export default function CartPage() {
               size="lg"
               className="w-full mt-5 rounded-full h-12 font-bold text-base"
             >
-              <PixLogo className="h-4 w-4 mr-2" />
               Finalizar compra
             </Button>
             <Link

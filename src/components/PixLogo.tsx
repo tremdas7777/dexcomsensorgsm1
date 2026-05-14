@@ -1,17 +1,22 @@
+import { cn } from '@/lib/utils';
+
 interface PixLogoProps {
   className?: string;
 }
 
-export default function PixLogo({ className = 'h-4 w-4' }: PixLogoProps) {
+/** Selo “pague com PIX” (imagem oficial de marca) — usar só junto a textos sobre PIX, não em botões de ação. */
+export default function PixLogo({ className }: PixLogoProps) {
   return (
-    <svg
-      viewBox="0 0 512 512"
-      fill="currentColor"
-      className={className}
-      aria-label="PIX"
-    >
-      <path d="M242.67 0c8.54 0 16.54 3.33 22.55 9.34L416.12 160.24c6.01 6.01 9.34 14.01 9.34 22.55 0 8.54-3.33 16.54-9.34 22.55l-45.11 45.11c-6.01 6.01-14.01 9.34-22.55 9.34-8.54 0-16.54-3.33-22.55-9.34L256 182.77 120.99 317.78c-6.01 6.01-14.01 9.34-22.55 9.34-8.54 0-16.54-3.33-22.55-9.34l-45.11-45.11c-6.01-6.01-9.34-14.01-9.34-22.55 0-8.54 3.33-16.54 9.34-22.55L182.55 9.34C188.56 3.33 196.56 0 205.1 0c8.54 0 16.54 3.33 22.55 9.34l15.01 15.01L242.67 0z" />
-      <path d="M269.33 512c-8.54 0-16.54-3.33-22.55-9.34L95.88 351.76c-6.01-6.01-9.34-14.01-9.34-22.55 0-8.54 3.33-16.54 9.34-22.55l45.11-45.11c6.01-6.01 14.01-9.34 22.55-9.34 8.54 0 16.54 3.33 22.55 9.34L256 329.23l135.01-135.01c6.01-6.01 14.01-9.34 22.55-9.34 8.54 0 16.54 3.33 22.55 9.34l45.11 45.11c6.01 6.01 9.34 14.01 9.34 22.55 0 8.54-3.33 16.54-9.34 22.55L329.45 502.66c-6.01 6.01-14.01 9.34-22.55 9.34-8.54 0-16.54-3.33-22.55-9.34l-15.01-15.01L269.33 512z" />
-    </svg>
+    <img
+      src="/images/pix-pague-com-oficial.jpg"
+      alt=""
+      aria-label="PIX — pague com"
+      loading="lazy"
+      decoding="async"
+      className={cn(
+        className,
+        'inline-block h-5 w-auto max-w-[11rem] object-contain object-left align-middle shrink-0',
+      )}
+    />
   );
 }

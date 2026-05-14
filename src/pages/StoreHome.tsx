@@ -149,9 +149,9 @@ export default function StoreHome() {
               { t: 'Suporte ao Cliente', s: 'Atendimento dedicado' },
             ].map((b) => (
               <div key={b.t} className="bg-white rounded-xl p-5 shadow-sm">
-                <div className="text-primary font-bold flex items-center justify-center gap-1.5">
-                  {b.icon && <PixLogo className="h-4 w-4" />}
-                  {b.t}
+                <div className="text-primary font-bold flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2">
+                  {b.icon && <PixLogo className="h-6 max-w-[min(100%,11rem)]" />}
+                  <span>{b.t}</span>
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">{b.s}</div>
               </div>
