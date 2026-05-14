@@ -14,7 +14,6 @@ export default function StoreFooter() {
           <h4 className="font-semibold mb-3">Loja</h4>
           <ul className="space-y-2 text-white/70">
             <li><Link to="/produto/sensor-g7-30-dias" className="hover:text-white">Sensor G7 - 30 dias</Link></li>
-            <li><Link to="/carrinho" className="hover:text-white">Carrinho</Link></li>
           </ul>
         </div>
         <div className="text-sm">
@@ -23,6 +22,11 @@ export default function StoreFooter() {
             <li>
               <a href="mailto:contato@sensordexcomgsm1.shop" className="hover:text-white underline underline-offset-2">
                 contato@sensordexcomgsm1.shop
+              </a>
+            </li>
+            <li>
+              <a href="tel:+5511963569864" className="hover:text-white underline underline-offset-2">
+                Suporte: (11) 96356-9864
               </a>
             </li>
             <li>Frete grátis para todo Brasil</li>
