@@ -31,8 +31,9 @@ export default function StoreFooter() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 text-center text-xs text-white/50 py-4 px-4">
-        © {new Date().getFullYear()} Dexcom — Todos os direitos reservados.
+      <div className="border-t border-white/10 text-center text-xs text-white/50 py-4 px-4 space-y-1.5">
+        <p>© {new Date().getFullYear()} Dexcom — Todos os direitos reservados.</p>
+        <p className="text-white/60">CNPJ: 47.130.874/0001-05</p>
       </div>
     </footer>
   );

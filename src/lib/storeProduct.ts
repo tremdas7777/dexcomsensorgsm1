@@ -37,6 +37,7 @@ export const STORE_PRODUCT: StoreProduct = {
     'https://cdn.shopify.com/s/files/1/0813/2778/4162/files/252143054-748356795-dexcom-g7-packaging-applictaor-sensor-800px-s-trans.webp?v=1778448658',
     'https://cdn.shopify.com/s/files/1/0813/2778/4162/files/114390156-674777024-en-US-g7-sensor-STP-GT-001-004.webp?v=1778448699',
     '/images/dexcom-g7-easy-application.webp',
+    '/images/dexcom-g6-banner-lifestyle.jpg',
   ],
   variants: [
     {
