@@ -58,8 +58,7 @@ export default function StoreFooter() {
         </div>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-white/10">
-          <p className="text-xs font-semibold uppercase tracking-wide text-white/80 mb-3">Formas de pagamento</p>
+        <div className="mt-6 pt-6 border-t border-white/10">
           <PaymentFooterBadges />
         </div>
       </div>

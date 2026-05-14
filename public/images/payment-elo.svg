@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 22" role="img" aria-labelledby="eloTitle">
+  <title id="eloTitle">Elo</title>
+  <rect width="36" height="22" rx="3.5" fill="#fff" stroke="#E8E8E8" stroke-width="0.5"/>
+  <rect x="3" y="3" width="8" height="16" rx="1.5" fill="#00A4E4"/>
+  <rect x="14" y="3" width="8" height="16" rx="1.5" fill="#EF4123"/>
+  <rect x="25" y="3" width="8" height="16" rx="1.5" fill="#FFCB05"/>
+</svg>
