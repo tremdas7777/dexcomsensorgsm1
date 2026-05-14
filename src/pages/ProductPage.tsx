@@ -4,6 +4,7 @@ import { Activity, Bell, Minus, Plus, ShieldCheck, Smartphone, Timer, Truck, Bad
 import type { LucideIcon } from 'lucide-react';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
+import PixLogo from '@/components/PixLogo';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -123,9 +124,10 @@ export default function ProductPage() {
           <div className="mt-3 text-3xl font-extrabold text-foreground">
             {formatBRL(variant.priceCents)}
           </div>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Pagamento via PIX — aprovação instantânea
-          </p>
+          <div className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+            <PixLogo className="h-3.5 w-3.5" />
+            <span>Pagamento via PIX — aprovação instantânea</span>
+          </div>
 
           {/* Variantes */}
           <fieldset className="mt-6">
@@ -192,6 +194,7 @@ export default function ProductPage() {
               size="lg"
               className="flex-1 rounded-full h-12 font-bold text-base"
             >
+              <PixLogo className="h-4 w-4 mr-2" />
               Comprar agora
             </Button>
           </div>
@@ -202,7 +205,7 @@ export default function ProductPage() {
               <Truck className="h-4 w-4 text-primary" /> Frete grátis para todo o Brasil
             </li>
             <li className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-primary" /> Pagamento 100% seguro via PIX
+              <ShieldCheck className="h-4 w-4 text-primary" /> Pagamento 100% seguro via <PixLogo className="h-3.5 w-3.5 inline" />
             </li>
             <li className="flex items-center gap-2">
               <BadgeCheck className="h-4 w-4 text-primary" /> Produto original Dexcom
