@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import StoreHeader from '@/components/store/StoreHeader';
 import StoreFooter from '@/components/store/StoreFooter';
+import PixLogo from '@/components/PixLogo';
 import { Button } from '@/components/ui/button';
 import { STORE_PRODUCT, HOME_HERO_IMAGES, formatBRL } from '@/lib/storeProduct';
 import { trackEvent } from '@/lib/funnelTracking';
@@ -143,12 +144,15 @@ export default function StoreHome() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
               { t: 'Frete Grátis', s: 'Para todo o Brasil' },
-              { t: 'Pagamento via PIX', s: 'Aprovação instantânea' },
+              { t: 'Pagamento via PIX', s: 'Aprovação instantânea', icon: true },
               { t: 'Entrega Rastreada', s: 'Acompanhe seu pedido' },
               { t: 'Suporte ao Cliente', s: 'Atendimento dedicado' },
             ].map((b) => (
               <div key={b.t} className="bg-white rounded-xl p-5 shadow-sm">
-                <div className="text-primary font-bold">{b.t}</div>
+                <div className="text-primary font-bold flex items-center justify-center gap-1.5">
+                  {b.icon && <PixLogo className="h-4 w-4" />}
+                  {b.t}
+                </div>
                 <div className="text-sm text-muted-foreground mt-1">{b.s}</div>
               </div>
             ))}
