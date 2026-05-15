@@ -56,6 +56,16 @@ const ALERT_TOPICS: { id: string; title: string; body: string }[] = [
   },
 ];
 
+const DAYS_PER_SENSOR = 10;
+
+function getKitDuration(variantId: string) {
+  const kits = { v1: 1, v2: 2, v3: 3 } as const;
+  const count = kits[variantId as keyof typeof kits] ?? 1;
+  const sensors = count * 3;
+  const totalDays = sensors * DAYS_PER_SENSOR;
+  return { sensors, totalDays, kits: count };
+}
+
 const STORY_BLOCKS: {
   src: string;
   alt: string;
@@ -112,6 +122,7 @@ export default function ProductPage() {
   const [activeImage, setActiveImage] = useState(0);
 
   const variant = product.variants.find((v) => v.id === variantId)!;
+  const kit = getKitDuration(variant.id);
 
   const trackedView = useRef(false);
   useEffect(() => {
@@ -162,6 +173,14 @@ export default function ProductPage() {
         {/* Compra */}
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground">{product.title}</h1>
+          <p className="mt-2 text-sm sm:text-base leading-relaxed text-foreground rounded-xl border border-primary/20 bg-primary/5 px-3 py-2.5">
+            <strong className="text-primary">{kit.sensors} sensores Dexcom G7</strong>
+            {' — '}
+            até <strong>{DAYS_PER_SENSOR} dias</strong> de uso em cada sensor
+            {' · '}
+            <strong>{kit.totalDays} dias no total</strong> de monitoramento contínuo
+            {kit.kits > 1 ? ` (${kit.kits} kits de 3 sensores)` : ''}
+          </p>
           <div className="mt-3 text-3xl font-extrabold text-foreground">
             {formatBRL(variant.priceCents)}
           </div>

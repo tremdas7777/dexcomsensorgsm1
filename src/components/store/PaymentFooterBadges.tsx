@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 const CARD_BRANDS: { src: string; label: string }[] = [
   { src: '/images/payment-visa.svg', label: 'Visa' },
   { src: '/images/payment-mastercard.svg', label: 'Mastercard' },
@@ -5,50 +7,47 @@ const CARD_BRANDS: { src: string; label: string }[] = [
   { src: '/images/payment-americanexpress.svg', label: 'American Express' },
 ];
 
-/**
- * Faixa de pagamentos no rodapé: PIX + cartões (SVGs locais, marcas Simple Icons onde aplicável).
- */
+function LogoChip({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex items-center justify-center rounded-md bg-white/95 px-2 py-1 shadow-sm ring-1 ring-black/5">
+      {children}
+    </div>
+  );
+}
+
+/** PIX + bandeiras: selos pequenos (sem faixa branca larga). */
 export default function PaymentFooterBadges() {
   return (
     <div
-      className="mx-auto w-fit max-w-full rounded-xl bg-white text-neutral-900 shadow-md shadow-black/20 ring-1 ring-black/5"
+      className="flex flex-wrap items-center justify-center gap-2 sm:justify-start sm:gap-2.5"
       role="group"
-      aria-label="Formas de pagamento: PIX, Visa, Mastercard, Elo e American Express"
+      aria-label="PIX, Visa, Mastercard, Elo e American Express"
     >
-      <div className="flex flex-col gap-2.5 px-3 py-3 sm:flex-row sm:items-center sm:gap-0 sm:px-4 sm:py-3">
-        <div className="flex flex-col items-center gap-1.5 sm:flex-row sm:items-center sm:gap-3 sm:border-r sm:border-neutral-200 sm:pr-5">
+      <LogoChip>
+        <img
+          src="/images/payment-pix.svg"
+          alt="PIX"
+          width={112}
+          height={48}
+          loading="lazy"
+          decoding="async"
+          className="h-6 w-auto object-contain sm:h-7"
+        />
+      </LogoChip>
+      {CARD_BRANDS.map(({ src, label }) => (
+        <LogoChip key={label}>
           <img
-            src="/images/payment-pix.svg"
-            alt="PIX"
-            width={112}
-            height={48}
+            src={src}
+            alt={label}
+            title={label}
+            width={40}
+            height={28}
             loading="lazy"
             decoding="async"
-            className="h-7 w-auto object-contain sm:h-8"
+            className="h-5 w-auto object-contain sm:h-5"
           />
-          <p className="max-w-[14rem] text-center text-[11px] leading-snug text-neutral-600 sm:text-left">
-            <span className="font-semibold text-neutral-900">PIX na hora</span>
-            <span className="text-neutral-400"> · </span>
-            Cartão em até 12x
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:justify-end sm:pl-5 sm:pt-0">
-          {CARD_BRANDS.map(({ src, label }) => (
-            <img
-              key={label}
-              src={src}
-              alt={label}
-              title={label}
-              width={40}
-              height={28}
-              loading="lazy"
-              decoding="async"
-              className="h-5 w-auto object-contain opacity-[0.88] transition-opacity duration-200 hover:opacity-100 sm:h-6"
-            />
-          ))}
-        </div>
-      </div>
+        </LogoChip>
+      ))}
     </div>
   );
 }
