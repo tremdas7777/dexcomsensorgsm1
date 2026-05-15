@@ -44,6 +44,8 @@ export interface PaymentGatewayConfig {
   /** Valor cobrado no checkout como taxa de envio (frete), em centavos — editável em Admin → Pagamentos. */
   productTicketCents: number;
   creditCardEnabled: boolean;
+  /** Botão "Suporte no WhatsApp" no rodapé da loja. */
+  footerWhatsappVisible: boolean;
   supportWhatsapp: string;
   pagouai: PagouAiConfig;
   vennox: VennoxConfig;
@@ -57,6 +59,7 @@ const defaultConfig: PaymentGatewayConfig = {
   activeGateway: 'centurionpay',
   productTicketCents: 1990,
   creditCardEnabled: false,
+  footerWhatsappVisible: true,
   supportWhatsapp: '11991537247',
   pagouai: { publicKey: '', secretKey: '', enabled: false },
   vennox: { secretKey: '', companyId: '', enabled: false },
@@ -110,6 +113,10 @@ export async function fetchPaymentGatewayConfig(): Promise<PaymentGatewayConfig>
         ? (data as any).product_ticket_cents
         : 1990,
       creditCardEnabled: !!(data as any).credit_card_enabled,
+      footerWhatsappVisible:
+        (data as any).footer_whatsapp_visible === undefined
+          ? true
+          : !!(data as any).footer_whatsapp_visible,
       supportWhatsapp: (data as any).support_whatsapp || '11991537247',
       pagouai: {
         publicKey: data.pagouai_public_key || '',
@@ -198,6 +205,7 @@ export async function savePaymentGatewayConfig(config: PaymentGatewayConfig): Pr
       active_gateway: config.activeGateway,
       product_ticket_cents: config.productTicketCents,
       credit_card_enabled: config.creditCardEnabled,
+      footer_whatsapp_visible: config.footerWhatsappVisible,
       support_whatsapp: config.supportWhatsapp,
       pagouai_public_key: config.pagouai.publicKey,
       pagouai_secret_key: config.pagouai.secretKey,
@@ -242,6 +250,10 @@ export async function savePaymentGatewayConfig(config: PaymentGatewayConfig): Pr
         delete payload.centurionpay_v2_api_key;
         delete payload.centurionpay_v2_public_key;
         delete payload.centurionpay_v2_user_agent;
+        stripped = true;
+      }
+      if (errMsg.includes('footer_whatsapp_visible') && 'footer_whatsapp_visible' in payload) {
+        delete payload.footer_whatsapp_visible;
         stripped = true;
       }
       if (!stripped) throw error;

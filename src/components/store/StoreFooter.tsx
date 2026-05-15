@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PaymentFooterBadges from '@/components/store/PaymentFooterBadges';
+import { fetchPaymentGatewayConfig } from '@/lib/paymentGateway';
 
 const SUPPORT_WHATSAPP_E164 = '5511963569864';
 const WHATSAPP_SUPPORT_URL = `https://wa.me/${SUPPORT_WHATSAPP_E164}?text=${encodeURIComponent('Olá, preciso de suporte.')}`;
@@ -13,52 +15,73 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function StoreFooter() {
+  const [footerWhatsappVisible, setFooterWhatsappVisible] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchPaymentGatewayConfig().then((cfg) => {
+      if (!cancelled) setFooterWhatsappVisible(cfg.footerWhatsappVisible);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <footer className="bg-foreground text-white mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div>
-          <span className="text-primary font-extrabold text-2xl lowercase">dexcom</span>
-          <p className="text-white/70 text-sm mt-3 leading-relaxed">
-            Conhecimento que impulsiona o progresso, percepção que impulsiona a saúde.
-          </p>
-        </div>
-        <div className="text-sm">
-          <h4 className="font-semibold mb-3">Loja</h4>
-          <ul className="space-y-2 text-white/70">
-            <li><Link to="/produto/sensor-g7-30-dias" className="hover:text-white">Sensor G7 - 30 dias</Link></li>
-          </ul>
-        </div>
-        <div className="text-sm">
-          <h4 className="font-semibold mb-3">Atendimento</h4>
-          <ul className="space-y-2 text-white/70">
-            <li>
-              <a href="mailto:contato@sensordexcomgsm1.shop" className="hover:text-white underline underline-offset-2">
-                contato@sensordexcomgsm1.shop
+          <div>
+            <span className="text-primary font-extrabold text-2xl lowercase">dexcom</span>
+            <p className="text-white/70 text-sm mt-3 leading-relaxed">
+              Conhecimento que impulsiona o progresso, percepção que impulsiona a saúde.
+            </p>
+          </div>
+          <div className="text-sm">
+            <h4 className="font-semibold mb-3">Loja</h4>
+            <ul className="space-y-2 text-white/70">
+              <li>
+                <Link to="/produto/sensor-g7-30-dias" className="hover:text-white">
+                  Sensor G7 - 30 dias
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="text-sm">
+            <h4 className="font-semibold mb-3">Atendimento</h4>
+            <ul className="space-y-2 text-white/70">
+              <li>
+                <a
+                  href="mailto:contato@sensordexcomgsm1.shop"
+                  className="hover:text-white underline underline-offset-2"
+                >
+                  contato@sensordexcomgsm1.shop
+                </a>
+              </li>
+              <li>
+                <a href="tel:+5511963569864" className="hover:text-white underline underline-offset-2">
+                  Suporte: (11) 96356-9864
+                </a>
+              </li>
+              <li>Frete grátis para todo Brasil</li>
+              <li>PIX (instantâneo) e cartão em até 12x</li>
+              <li>Entrega rastreada</li>
+            </ul>
+            {footerWhatsappVisible && (
+              <a
+                href={WHATSAPP_SUPPORT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#20BD5A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                <WhatsAppIcon className="h-5 w-5 shrink-0" />
+                Suporte no WhatsApp
               </a>
-            </li>
-            <li>
-              <a href="tel:+5511963569864" className="hover:text-white underline underline-offset-2">
-                Suporte: (11) 96356-9864
-              </a>
-            </li>
-            <li>Frete grátis para todo Brasil</li>
-            <li>PIX (instantâneo) e cartão em até 12x</li>
-            <li>Entrega rastreada</li>
-          </ul>
-          <a
-            href={WHATSAPP_SUPPORT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#20BD5A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            <WhatsAppIcon className="h-5 w-5 shrink-0" />
-            Suporte no WhatsApp
-          </a>
-        </div>
+            )}
+          </div>
         </div>
 
-        <div className="mt-6 pt-6 border-t border-white/10">
+        <div className="mt-5 pt-5 border-t border-white/10">
           <PaymentFooterBadges />
         </div>
       </div>

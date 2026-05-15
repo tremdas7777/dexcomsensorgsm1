@@ -88,6 +88,7 @@ export default function AdminPanel() {
     activeGateway: 'centurionpay',
     productTicketCents: 4490,
     creditCardEnabled: false,
+    footerWhatsappVisible: true,
     supportWhatsapp: '11991537247',
     pagouai: { publicKey: '', secretKey: '', enabled: false },
     vennox: { secretKey: '', companyId: '', enabled: false },
@@ -1185,6 +1186,31 @@ export default function AdminPanel() {
                     >
                       Salvar Número
                     </Button>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-border flex items-center justify-between gap-3">
+                    <div>
+                      <p className="font-bold text-foreground text-sm">Botão no rodapé da loja</p>
+                      <p className="text-muted-foreground text-[11px] mt-0.5">
+                        Exibe ou oculta o botão verde &quot;Suporte no WhatsApp&quot; no rodapé (home, produto, etc.).
+                      </p>
+                    </div>
+                    <Switch
+                      checked={gatewayConfig.footerWhatsappVisible}
+                      onCheckedChange={async (checked) => {
+                        const updated = { ...gatewayConfig, footerWhatsappVisible: checked };
+                        setGatewayConfig(updated);
+                        const ok = await savePaymentGatewayConfig(updated);
+                        setGatewayMessage(
+                          ok
+                            ? checked
+                              ? 'Botão WhatsApp no rodapé ATIVADO'
+                              : 'Botão WhatsApp no rodapé OCULTO'
+                            : 'Erro ao salvar',
+                        );
+                        setTimeout(() => setGatewayMessage(''), 3000);
+                      }}
+                    />
                   </div>
                 </div>
               </div>
