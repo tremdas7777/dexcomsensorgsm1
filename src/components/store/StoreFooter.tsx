@@ -60,7 +60,7 @@ export default function StoreFooter() {
               </li>
               <li>
                 <a href="tel:+5577981171864" className="hover:text-white underline underline-offset-2">
-                  Suporte: (11) 96356-9864
+                  Suporte: (77) 98117-1864
                 </a>
               </li>
               <li>Frete grátis para todo Brasil</li>
