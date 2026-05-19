@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PaymentFooterBadges from '@/components/store/PaymentFooterBadges';
 import { fetchPaymentGatewayConfig } from '@/lib/paymentGateway';
 
-const SUPPORT_WHATSAPP_E164 = '5511963569864';
+const SUPPORT_WHATSAPP_E164 = '5577981171864';
 const WHATSAPP_SUPPORT_URL = `https://wa.me/${SUPPORT_WHATSAPP_E164}?text=${encodeURIComponent('Olá, preciso de suporte.')}`;
 
 function WhatsAppIcon({ className }: { className?: string }) {
