@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PaymentFooterBadges from '@/components/store/PaymentFooterBadges';
 import { fetchPaymentGatewayConfig } from '@/lib/paymentGateway';
 
-const SUPPORT_WHATSAPP_E164 = '5511963569864';
+const SUPPORT_WHATSAPP_E164 = '5577981171864';
 const WHATSAPP_SUPPORT_URL = `https://wa.me/${SUPPORT_WHATSAPP_E164}?text=${encodeURIComponent('Olá, preciso de suporte.')}`;
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -59,8 +59,8 @@ export default function StoreFooter() {
                 </a>
               </li>
               <li>
-                <a href="tel:+5511963569864" className="hover:text-white underline underline-offset-2">
-                  Suporte: (11) 96356-9864
+                <a href="tel:+5577981171864" className="hover:text-white underline underline-offset-2">
+                  Suporte: (77) 98117-1864
                 </a>
               </li>
               <li>Frete grátis para todo Brasil</li>
