@@ -59,7 +59,7 @@ export default function StoreFooter() {
                 </a>
               </li>
               <li>
-                <a href="tel:+5511963569864" className="hover:text-white underline underline-offset-2">
+                <a href="tel:+5577981171864" className="hover:text-white underline underline-offset-2">
                   Suporte: (11) 96356-9864
                 </a>
               </li>
