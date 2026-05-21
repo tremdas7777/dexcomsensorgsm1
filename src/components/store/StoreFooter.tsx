@@ -52,10 +52,10 @@ export default function StoreFooter() {
             <ul className="space-y-2 text-white/70">
               <li>
                 <a
-                  href="mailto:contato@sensordexcomgsm1.shop"
+                  href="mailto:contato@dexcomsensor.com"
                   className="hover:text-white underline underline-offset-2"
                 >
-                  contato@sensordexcomgsm1.shop
+                  contato@dexcomsensor.com
                 </a>
               </li>
               <li>
