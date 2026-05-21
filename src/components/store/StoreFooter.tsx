@@ -58,26 +58,10 @@ export default function StoreFooter() {
                   contato@sensordexcomgsm1.shop
                 </a>
               </li>
-              <li>
-                <a href="tel:+5577981171864" className="hover:text-white underline underline-offset-2">
-                  Suporte: (77) 98117-1864
-                </a>
-              </li>
               <li>Frete grátis para todo Brasil</li>
               <li>PIX (instantâneo) e cartão em até 12x</li>
               <li>Entrega rastreada</li>
             </ul>
-            {footerWhatsappVisible && (
-              <a
-                href={WHATSAPP_SUPPORT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#20BD5A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                <WhatsAppIcon className="h-5 w-5 shrink-0" />
-                Suporte no WhatsApp
-              </a>
-            )}
           </div>
         </div>
 
